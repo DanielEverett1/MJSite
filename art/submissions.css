@@ -10,6 +10,7 @@ body {
     height: 100vh;
     font-family: 'Playwrite AU QLD', sans-serif;
     text-align: center;
+    flex-direction: column;
 }
 
 form {
@@ -72,4 +73,7 @@ label {
 
 h1, h2, h3, h4, h5, h6 {
     color: #dda0dd;
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 100%;
 }

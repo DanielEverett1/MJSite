@@ -2,7 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: blanchedalmond;
+    background-color: #ffe4e1;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -15,7 +15,7 @@ form {
     max-width: 600px;
     margin: 20px 0;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #d3d3d3;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -27,4 +27,47 @@ form>* {
 
 form>*:last-child {
     margin-bottom: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #add8e6;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #87ceeb;
+}
+
+label {
+    color: #ffb6c1;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #ffd700;
 }

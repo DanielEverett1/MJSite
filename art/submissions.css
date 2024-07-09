@@ -2,12 +2,14 @@
 
 body {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     background-color: #ffe4e1;
     margin: 0;
     padding: 0;
+    height: 100vh;
     font-family: 'Playwrite AU QLD', sans-serif;
+    text-align: center;
 }
 
 form {
@@ -23,21 +25,21 @@ form {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-form>* {
+form > * {
     margin-bottom: 15px;
 }
 
-form>*:last-child {
+form > *:last-child {
     margin-bottom: 0;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
 textarea {
     width: 90%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin: 0 auto 10px auto;
     border: 1px solid #d3d3d3;
     border-radius: 4px;
     background-color: #f8f8f8;
@@ -52,6 +54,9 @@ input[type="submit"] {
     color: #fff;
     font-size: 16px;
     cursor: pointer;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 input[type="submit"]:hover {
@@ -65,11 +70,6 @@ label {
     display: block;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     color: #dda0dd;
 }

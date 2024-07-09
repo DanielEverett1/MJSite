@@ -7,40 +7,51 @@ body {
     background-color: #ffe4e1;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Playwrite AU QLD', sans-serif;
     text-align: center;
     flex-direction: column;
+    overflow-y: auto;
+}
+
+.header {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    box-sizing: border-box;
+    /* Ensures padding is included in width calculation */
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 form {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 600px;
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #d3d3d3;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-form > * {
+form>* {
     margin-bottom: 15px;
 }
 
-form > *:last-child {
+form>*:last-child {
     margin-bottom: 0;
 }
 
-input[type="text"], 
-input[type="email"], 
-input[type="password"], 
+input[type="text"],
+input[type="email"],
+input[type="password"],
 textarea {
-    width: 90%;
+    width: calc(100% - 20px);
     padding: 10px;
-    margin: 0 auto 10px auto;
     border: 1px solid #d3d3d3;
     border-radius: 4px;
     background-color: #f8f8f8;
@@ -71,9 +82,10 @@ label {
     display: block;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h4 {
     color: #dda0dd;
-    margin-top: 0;
+    margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
 }

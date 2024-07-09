@@ -9,20 +9,25 @@
 </head>
 
 <body>
-    <h1>MilkJug Art Submissions</h1>
-    <h4>Form to submit art</h4>
+    <div class="header">
+        <h1>MilkJug Art Submissions</h1>
+        <h4>Form to submit art</h4>
+    </div>
 
-    <form action="" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+    <div class="container">
+        <form action="" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
 
-        <label for="reason">Reason:</label>
-        <input type="text" id="reason" name="reason" required>
+            <label for="reason">Reason:</label>
+            <input type="text" id="reason" name="reason" required>
 
-        <label for="image">Image:</label>
-        <input type="file" id="image" name="image" accept="image/*" required>
-        <img id="imagePreview" src="#" alt="Image Preview">
-    </form>
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <img id="imagePreview" src="#" alt="Image Preview">
+        </form>
+    </div>
+
     <script src="submissions.js"></script>
 </body>
 

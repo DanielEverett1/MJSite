@@ -8,5 +8,9 @@ document.getElementById('image').addEventListener('change', function (event) {
             preview.style.display = 'block';
         };
         reader.readAsDataURL(file);
+    } else {
+        const preview = document.getElementById('imagePreview');
+        preview.style.display = 'none';
+        preview.src = '#';
     }
 });

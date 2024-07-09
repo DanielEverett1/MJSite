@@ -1,0 +1,9 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[dev]
+  command = "npm start"
+
+[functions]
+  directory = "netlify/functions"

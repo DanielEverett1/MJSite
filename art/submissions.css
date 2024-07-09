@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap');
+
 body {
     display: flex;
     flex-direction: column;
@@ -5,7 +7,7 @@ body {
     background-color: #ffe4e1;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Playwrite AU QLD', sans-serif;
 }
 
 form {

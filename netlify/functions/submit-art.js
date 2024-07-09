@@ -29,16 +29,22 @@ app.use(express.json());
 
 app.post('/.netlify/functions/submit-art', async (req, res) => {
     try {
-        console.log('Received request body:', req.body); // Log received request body
         const { name, reason } = req.body;
 
         if (!name || !reason) {
             return res.status(400).json({ error: 'Name and reason are required fields' });
         }
 
-        // Rest of your function code
+        // Create new Art document
+        const newArt = new Art({
+            name,
+            reason,
+        });
+
+        await newArt.save();
+        res.status(200).json({ message: 'Art submitted successfully' });
     } catch (error) {
-        console.error('Error handling request:', error);
+        console.error('Error submitting art:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });

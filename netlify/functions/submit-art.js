@@ -1,23 +1,24 @@
-const mongoose = require('mongoose');
-const multer = require('multer');
 const express = require('express');
 const serverless = require('serverless-http');
-const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
 
 const app = express();
-const upload = multer({ dest: '/tmp' }); // Use /tmp directory for serverless functions
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+}).then(() => {
+    console.log('Connected to MongoDB');
+}).catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+    process.exit(1); // Exit process if MongoDB connection fails
 });
 
 const artSchema = new mongoose.Schema({
     name: String,
     reason: String,
-    image: String,
+    // Remove image field from schema if not saving images
 });
 
 const Art = mongoose.model('Art', artSchema);
@@ -26,28 +27,25 @@ const Art = mongoose.model('Art', artSchema);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post('/submit-art', upload.single('image'), async (req, res) => {
+app.post('/.netlify/functions/submit-art', async (req, res) => {
     try {
         const { name, reason } = req.body;
-        const { file } = req;
-        const tempPath = file.path;
-        const targetPath = path.join(__dirname, 'uploads', file.originalname);
 
-        fs.rename(tempPath, targetPath, async err => {
-            if (err) return res.status(500).send(err);
+        if (!name || !reason) {
+            return res.status(400).json({ error: 'Name and reason are required fields' });
+        }
 
-            const newArt = new Art({
-                name,
-                reason,
-                image: targetPath,
-            });
-
-            await newArt.save();
-            res.status(200).send('Art submitted successfully');
+        // Create new Art document without image field
+        const newArt = new Art({
+            name,
+            reason,
         });
+
+        await newArt.save();
+        res.status(200).json({ message: 'Art submitted successfully' });
     } catch (error) {
-        console.error('Error in submit-art function:', error);
-        res.status(500).send('Internal Server Error');
+        console.error('Error submitting art:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 

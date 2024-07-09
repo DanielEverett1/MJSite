@@ -15,16 +15,13 @@
     </div>
 
     <div class="container">
-        <form action="/.netlify/functions/submit-art" method="post" enctype="multipart/form-data">
+        <form action="/.netlify/functions/submit-art" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
             <label for="reason">Reason:</label>
             <input type="text" id="reason" name="reason" required>
 
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
-            <img id="imagePreview" src="#" alt="Image Preview">
             <button type="submit">Submit</button>
         </form>
     </div>

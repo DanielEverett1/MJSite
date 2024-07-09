@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
 const express = require('express');
-const { createServer } = require('http');
-const { parse } = require('url');
-const { ApolloServer, gql } = require('apollo-server-express');
-const { GraphQLUpload } = require('graphql-upload');
+const serverless = require('serverless-http');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
-const upload = multer({ dest: '/tmp' });
+const upload = multer({ dest: '/tmp' }); // Use /tmp directory for serverless functions
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
@@ -23,56 +22,32 @@ const artSchema = new mongoose.Schema({
 
 const Art = mongoose.model('Art', artSchema);
 
-const typeDefs = gql`
-    scalar Upload
+// Middleware to handle multipart/form-data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-    type Art {
-        id: ID!
-        name: String!
-        reason: String!
-        image: String!
-    }
+app.post('/submit-art', upload.single('image'), async (req, res) => {
+    try {
+        const { name, reason } = req.body;
+        const { file } = req;
+        const tempPath = file.path;
+        const targetPath = path.join(__dirname, 'uploads', file.originalname);
 
-    type Query {
-        arts: [Art]
-    }
+        fs.rename(tempPath, targetPath, async err => {
+            if (err) return res.status(500).send(err);
 
-    type Mutation {
-        submitArt(name: String!, reason: String!, image: Upload!): Art
-    }
-`;
-
-const resolvers = {
-    Upload: GraphQLUpload,
-    Query: {
-        arts: async () => Art.find(),
-    },
-    Mutation: {
-        submitArt: async (_, { name, reason, image }) => {
-            const { createReadStream, filename } = await image;
-            const filePath = `/tmp/${filename}`;
-            const stream = createReadStream();
-            const out = require('fs').createWriteStream(filePath);
-            stream.pipe(out);
-            await new Promise((resolve, reject) => {
-                out.on('finish', resolve);
-                out.on('error', reject);
+            const newArt = new Art({
+                name,
+                reason,
+                image: targetPath,
             });
 
-            const newArt = new Art({ name, reason, image: filePath });
             await newArt.save();
-            return newArt;
-        },
-    },
-};
+            res.status(200).send('Art submitted successfully');
+        });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
 
-const server = new ApolloServer({ typeDefs, resolvers });
-
-server.applyMiddleware({ app, path: '/' });
-
-const handler = (req, res) => {
-    const parsedUrl = parse(req.url, true);
-    app(req, res, parsedUrl);
-};
-
-module.exports = { handler };
+module.exports.handler = serverless(app);

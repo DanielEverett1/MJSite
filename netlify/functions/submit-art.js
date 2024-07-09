@@ -46,7 +46,8 @@ app.post('/submit-art', upload.single('image'), async (req, res) => {
             res.status(200).send('Art submitted successfully');
         });
     } catch (error) {
-        res.status(500).send(error.message);
+        console.error('Error in submit-art function:', error);
+        res.status(500).send('Internal Server Error');
     }
 });
 

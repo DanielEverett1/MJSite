@@ -2,9 +2,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: blanchedalmond
+    background-color: blanchedalmond;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 form {
     display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

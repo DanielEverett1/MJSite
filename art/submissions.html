@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milkjug - Art Submissions</title>
+    <title>MilkJug - Art Submissions</title>
     <link rel="stylesheet" href="submissions.css">
+    <style>
+        #imagePreview {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+    </style>
 </head>
+
 <body>
     <h1>MilkJug Art Submissions</h1>
     <h4>Form to submit art</h4>
@@ -18,7 +28,9 @@
         <input type="text" id="reason" name="reason" required>
 
         <label for="image">Image:</label>
-        <input type="file" id="image" name="image" required>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <img id="imagePreview" src="#" alt="Image Preview">
     </form>
 </body>
+
 </html>

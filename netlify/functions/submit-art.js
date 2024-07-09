@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 const artSchema = new mongoose.Schema({
     name: String,
     reason: String,
-    // Remove image field from schema if not saving images
+    // Optionally include other fields as needed
 });
 
 const Art = mongoose.model('Art', artSchema);
@@ -35,7 +35,7 @@ app.post('/.netlify/functions/submit-art', async (req, res) => {
             return res.status(400).json({ error: 'Name and reason are required fields' });
         }
 
-        // Create new Art document without image field
+        // Create new Art document
         const newArt = new Art({
             name,
             reason,

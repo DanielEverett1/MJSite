@@ -8,7 +8,7 @@ const app = express();
 const upload = multer({ dest: 'uploads/' });
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/milkjug', {
+mongoose.connect('mongodb+srv://evancopas:Tc5mggYDBkZ1KTv8@cluster0.2vs0ctf.mongodb.net/milkjug/milkart', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });

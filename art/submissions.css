@@ -4,3 +4,7 @@ body {
     align-items: center;
     background-color: blanchedalmond
 }
+
+form {
+    display: block;
+}

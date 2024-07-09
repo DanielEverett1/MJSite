@@ -15,7 +15,7 @@
     </div>
 
     <div class="container">
-        <form action="" method="post">
+        <form action="/submit" method="post" enctype="multipart/form-data">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -25,6 +25,7 @@
             <label for="image">Image:</label>
             <input type="file" id="image" name="image" accept="image/*" required>
             <img id="imagePreview" src="#" alt="Image Preview">
+            <button type="submit">Submit</button>
         </form>
     </div>
 

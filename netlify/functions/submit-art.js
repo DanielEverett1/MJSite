@@ -23,11 +23,11 @@ const artSchema = new mongoose.Schema({
 
 const Art = mongoose.model('Art', artSchema);
 
-// Middleware to handle multipart/form-data
+// Middleware to handle form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post('/.netlify/functions/submit-art', async (req, res) => {
+app.post('/netlify/functions/submit-art.js', async (req, res) => {
     try {
         const { name, reason } = req.body;
 

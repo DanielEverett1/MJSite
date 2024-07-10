@@ -15,17 +15,19 @@
     </div>
 
     <div class="container">
-        <form action="/.netlify/functions/submit-art" method="post">
+        <form id="artSubmissionForm" action="https://milkjug-art.netlify.app/.netlify/functions/submit-art"
+            method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
-
             <label for="reason">Reason:</label>
             <input type="text" id="reason" name="reason" required>
-
-            <label for="image">Image: <label id="imagePreview"></label>
-            <input type="file" id="image" name="image" accept="image/*" required>
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+            <img id="imagePreview" src="#" alt="Image Preview">
             <button type="submit">Submit</button>
         </form>
+
+
     </div>
 
     <script src="submissions.js"></script>

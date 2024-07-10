@@ -21,29 +21,29 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('File input element not found');
     }
 
-    const form = document.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', async function (event) {
-            event.preventDefault();
+    document.querySelector('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-            const formData = new FormData(form);
-            try {
-                const response = await fetch('https://milkjug-art.netlify.app/.netlify/functions/submit-art', { // Updated endpoint
-                    method: 'POST',
-                    body: formData,
-                });
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
 
-                if (!response.ok) {
-                    throw new Error('Failed to submit form');
-                }
+        try {
+            const response = await fetch('/.netlify/functions/submit-art', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-                const data = await response.json();
-                console.log('Response:', data);
-            } catch (error) {
-                console.error('Error submitting form:', error);
+            if (!response.ok) {
+                throw new Error('Failed to submit form');
             }
-        });
-    } else {
-        console.error('Form element not found');
-    }
+
+            const result = await response.json();
+            console.log('Form submission successful:', result);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    });
 });

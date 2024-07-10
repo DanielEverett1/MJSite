@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 const artSchema = new mongoose.Schema({
-    name: String,
+    username: String,
     reason: String,
     // Optionally include other fields as needed
 });
@@ -29,15 +29,15 @@ app.use(express.json());
 
 app.post('/netlify/functions/submit-art.js', async (req, res) => {
     try {
-        const { name, reason } = req.body;
+        const { username, reason } = req.body;
 
-        if (!name || !reason) {
-            return res.status(400).json({ error: 'Name and reason are required fields' });
+        if (!username || !reason) {
+            return res.status(400).json({ error: 'username and reason are required fields' });
         }
 
         // Create new Art document
         const newArt = new Art({
-            name,
+            username,
             reason,
         });
 

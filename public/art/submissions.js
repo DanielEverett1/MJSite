@@ -1,24 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const handleImagePreview = function (event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const preview = document.getElementById('imagePreview');
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-        } else {
-            const preview = document.getElementById('imagePreview');
-            preview.style.display = 'none';
-            preview.src = '#';
-        }
-    };
-
     const fileInput = document.getElementById('image');
     if (fileInput) {
-        fileInput.addEventListener('change', handleImagePreview);
+        fileInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const preview = document.getElementById('imagePreview');
+                preview.style.display = 'none';
+                preview.src = '#';
+            }
+        });
     } else {
         console.error('File input element not found');
     }
@@ -30,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const formData = new FormData(form);
             try {
-                const response = await fetch('/.netlify/functions/submit-art', {
+                const response = await fetch('https://milkjug-art.netlify.app/.netlify/functions/submit-art', { // Updated endpoint
                     method: 'POST',
                     body: formData,
                 });
@@ -41,10 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const data = await response.json();
                 console.log('Response:', data);
-                // Handle success response (e.g., show success message)
             } catch (error) {
                 console.error('Error submitting form:', error);
-                // Handle error (e.g., show error message)
             }
         });
     } else {
